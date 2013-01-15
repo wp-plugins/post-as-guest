@@ -7,7 +7,7 @@ $trclass = "";
 ?>
 
 <div class="wrap">
-	<div class="icon32" id="icon-options-general"></div>
+	<div class="icon32"><img src="<?php echo PAG_PLUGIN_URL.'/images/pag_32.png'; ?>" alt="pag" /></div>
 	<h2><?php _e('Post as guest -  Waiting queue', 'pag') ?></h2>
 
 		<table class="widefat">

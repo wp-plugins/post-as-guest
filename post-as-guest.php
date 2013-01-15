@@ -47,7 +47,7 @@ wp_localize_script( 'pag-ajax-request', 'PagAjax',
 //Create Menus
 function pag_create_menu() {
 	// create PAG menu page
-	add_menu_page( __('Post as Guest','pag'), __('Post as Guest','pag'), 8, PAG_PLUGIN_DIR.'/pag_review.php');
+	add_menu_page( __('Post as Guest','pag'), __('Post as Guest','pag'), 8, PAG_PLUGIN_DIR.'/pag_review.php','',PAG_PLUGIN_URL.'/images/pag.png');
 	add_submenu_page( PAG_PLUGIN_DIR.'/pag_review.php', __('Settings','pag'), __('Settings','pag'), 8, PAG_PLUGIN_DIR.'/pag_settings.php');
 }
 
