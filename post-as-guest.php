@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Powie's PostAsGuest
-Plugin URI: http://www.powie.de/postasguest
+Plugin URI: http://www.powie.de/wordpress/post-as-guest/
 Description: Post as Guest - Creates a form (shortcode) to a page to allow guests to post
-Version: 0.9.0
+Version: 0.9.1
 License: GPLv2
 Author: Thomas Ehrhardt
 Author URI: http://www.powie.de
@@ -31,18 +31,24 @@ function pagjs(){
 	wp_enqueue_script( 'pag-js', PAG_PLUGIN_URL.'/pag.js', false );
 }
 
-//add_action( 'wp_enqueue_scripts', 'pagjs' );
+//Nonces!!! nont nonsens :)
+add_action('init','pagnonces_create');
+function pagnonces_create(){
+	$pagnonce = wp_create_nonce('pagnonce');
+}
 
 //PAG JS Frontend
 // thanks to http://www.garyc40.com/2010/03/5-tips-for-using-ajax-in-wordpress/
 // embed the javascript file that makes the AJAX request
+
 wp_enqueue_script( 'pag-ajax-request', plugin_dir_url( __FILE__ ) . '/pagfe.js', array( 'jquery' ) );
 // declare the URL to the file that handles the AJAX request (wp-admin/admin-ajax.php)
 wp_localize_script( 'pag-ajax-request', 'PagAjax',
 	array(  'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			'enter_title' => __('Please enter title', 'pag'),
-			'enter_content' => __('Please enter content', 'pag' )        ) );
-
+			'enter_content' => __('Please enter content', 'pag' )
+	)
+);
 
 //Create Menus
 function pag_create_menu() {
@@ -72,6 +78,7 @@ function pag_shortcode( $atts ) {
 	$sc = '<!-- post-as-guest -->';
 	$sc.= '<div id="pag_form"><form method="post" id="pag" action="">
 			<input type="hidden" name="action" value="pag_post" />';
+    $sc.= wp_nonce_field( 'pagnonce', 'post_nonce', true, false );
 	$sc.= '<legend>'.__('Title', 'pag').'</legend>
         	 <input type="text" size="50" name="pagtitle" id="pagtitle" />
         	<legend>'.get_option('postfield-legend').'</legend>
@@ -145,6 +152,8 @@ function pag_post_approve(){
 add_action('wp_ajax_pag_post', 'pag_post');
 add_action('wp_ajax_nopriv_pag_post', 'pag_post' );
 function pag_post(){
+	//ccheck nonce
+	if (! wp_verify_nonce($_POST['post_nonce'], 'pagnonce') ) die('Security check');
 	$content = trim(get_option('prepost-code')).$_POST['pagcontent'].trim(get_option('afterpost-code'));
 	$post = array(  'post_title' => $_POST['pagtitle'],
 					'post_content' => $content ,
@@ -152,7 +161,7 @@ function pag_post(){
 					'post_status' => 'pending');
 	$id = wp_insert_post( $post, $wp_error );
 	$response = json_encode( array( 'success' => true ,
-								    'msg' => get_option('after-post-msg').' - '.$id ) );
+								    'msg' => get_option('after-post-msg') ) );
 	header( "Content-Type: application/json" );
 	echo $response;
 	//var_dump($_POST);
