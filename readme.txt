@@ -1,7 +1,7 @@
-=== Powie's Post As Guest ===
+=== Post As Guest ===
 Contributors: PowieT
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UST438WYW6HNJ
-Tags: Guest Post Posts Content
+Tags: Guest, Post, Posts, Content
 Requires at least: 2.5
 Tested up to: 3.5
 Stable tag: 0.9.1
@@ -36,7 +36,7 @@ Support Forum @ [powie.de](http://goo.gl/lfR7B)
 Use our forum at www.powie.de for support
 
 == Changelog ==
-= 0.9.1 (19.01.2013 =
+= 0.9.1 (19.01.2013) =
 * Using Nonces for frontend ajax security
 
 = 0.9.0 =
