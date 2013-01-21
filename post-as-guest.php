@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Powie's PostAsGuest
+Plugin Name: Post As Guest
 Plugin URI: http://www.powie.de/wordpress/post-as-guest/
 Description: Post as Guest - Creates a form (shortcode) to a page to allow guests to post
 Version: 0.9.1
