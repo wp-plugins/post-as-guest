@@ -21,6 +21,12 @@ if  ( get_option('postfield-legend') == '' ) {
         	<th scope="row"><?php _e('Post Field Legend', 'pag') ?></th>
         	<td><input type="text" size="50" name="postfield-legend" value="<?php echo get_option('postfield-legend'); ?>" /></td>
         </tr>
+
+        <tr valign="top">
+	        <th scope="row"><?php _e('User can select Category', 'pag') ?></th>
+    	    <td><input type="checkbox" name="category-select" id="category-select" value="1" <?php checked(get_option('category-select'), 1); ?> /></td>
+        </tr>
+
     </table>
     </div>
 </div>
@@ -75,6 +81,18 @@ if  ( get_option('postfield-legend') == '' ) {
 		<!-- fb -->
 		<iframe src="//www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fpowiede&amp;send=false&amp;layout=standard&amp;width=450&amp;show_faces=false&amp;font&amp;colorscheme=light&amp;action=like&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:350px; height:35px;" allowTransparency="true"></iframe>
 		</div>
+
+		<div style="float:left;margin-right: 10px; display:inline;">
+			<div class="g-plusone" data-size="small" data-href="http://www.powie.de"></div>
+			<script type="text/javascript">
+			  (function() {
+			    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			    po.src = 'https://apis.google.com/js/plusone.js';
+			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			  })();
+			</script>
+		</div>
+
     </div>
 </div>
 

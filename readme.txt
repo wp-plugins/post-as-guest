@@ -2,9 +2,9 @@
 Contributors: PowieT
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UST438WYW6HNJ
 Tags: Guest, Post, Posts, Content
-Requires at least: 2.5
+Requires at least: 2.8
 Tested up to: 3.5
-Stable tag: 0.9.1
+Stable tag: 0.9.2
 License: GPLv2
 
 Post as Guest - Creates a form (shortcode) to a page to allow guests to post content.
@@ -14,8 +14,8 @@ Creates as simple form for guests with a shortcode. New posts by guests will go 
 Admins can simple check new posts content and approve / delete or edit these posts.
 
 = Features: =
-Creates a simple form with a shortcode
-Ajax in Frontend and Backend
+Creates a simple form with a shortcode. 
+Ajax in Frontend and Backend.
 Localization Ready
 
 = Documentation =
@@ -32,10 +32,12 @@ Support Forum @ [powie.de](http://goo.gl/lfR7B)
 3. Place the shortcode on your page or `<?php echo do_shortcode('[post-as-guest]'); ?>` in your templates
 
 == Frequently Asked Questions ==
-
 Use our forum at www.powie.de for support
 
 == Changelog ==
+= 0.9.2 (23.01.2013) =
+* User can select category, if allowed in settings
+
 = 0.9.1 (19.01.2013) =
 * Using Nonces for frontend ajax security
 

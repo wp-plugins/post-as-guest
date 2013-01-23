@@ -3,7 +3,7 @@
 Plugin Name: Post As Guest
 Plugin URI: http://www.powie.de/wordpress/post-as-guest/
 Description: Post as Guest - Creates a form (shortcode) to a page to allow guests to post
-Version: 0.9.1
+Version: 0.9.2
 License: GPLv2
 Author: Thomas Ehrhardt
 Author URI: http://www.powie.de
@@ -59,11 +59,12 @@ function pag_create_menu() {
 
 function pag_register_settings() {
 	//register settings
-	register_setting( 'pag-settings', 'postfield-rows', 'intval' );
-	register_setting( 'pag-settings', 'postfield-legend');
+	register_setting( 'pag-settings', 'postfield-rows', 'intval' );		//Zeilen Textarea
+	register_setting( 'pag-settings', 'postfield-legend');				//Bezeichnung
 	register_setting( 'pag-settings', 'prepost-code');
 	register_setting( 'pag-settings', 'afterpost-code' );
 	register_setting( 'pag-settings', 'after-post-msg' );
+	register_setting( 'pag-settings', 'category-select' );				//Auswahl der Kategorie gestatten
 }
 
 function pag_shortcode( $atts ) {
@@ -82,8 +83,19 @@ function pag_shortcode( $atts ) {
 	$sc.= '<legend>'.__('Title', 'pag').'</legend>
         	 <input type="text" size="50" name="pagtitle" id="pagtitle" />
         	<legend>'.get_option('postfield-legend').'</legend>
-        	 <textarea rows="'.get_option('postfield-rows').'" name="pagcontent" id="pagcontent" style="width:100%;"></textarea>
-    	   <input type="submit" id="pagsubmit" name="pagsubmit" value="'.__("Send In", 'pag').'" /></form>
+        	 <textarea rows="'.get_option('postfield-rows').'" name="pagcontent" id="pagcontent" style="width:100%;"></textarea>';
+	if (get_option('category-select') == 1) {
+		$sc.='<legend>'.__('Category', 'pag').'</legend>
+			   <select id="categoryid" name="categoryid">
+					<option value="">'.__('-- Please Select Category','pag').'</option>';
+						$categories = get_categories('hierarchical=0&hide_empty=0');
+						foreach($categories as $category)	{
+							$selected = (is_category($category->cat_ID)) ? 'selected' : '';
+							$sc.='<option '.$selected.' value="'.$category->cat_ID.'">'.$category->cat_name.'</option>';
+						}
+		$sc.='</select><br />';
+	}
+    $sc.='   <input type="submit" id="pagsubmit" name="pagsubmit" value="'.__("Send In", 'pag').'" /></form>
 		   </div>';
 	$sc.='<!-- /post-as-guest -->';
 	return $sc;
@@ -154,11 +166,19 @@ add_action('wp_ajax_nopriv_pag_post', 'pag_post' );
 function pag_post(){
 	//ccheck nonce
 	if (! wp_verify_nonce($_POST['post_nonce'], 'pagnonce') ) die('Security check');
-	$content = trim(get_option('prepost-code')).$_POST['pagcontent'].trim(get_option('afterpost-code'));
-	$post = array(  'post_title' => $_POST['pagtitle'],
-					'post_content' => $content ,
-					'post_type' => 'post',
-					'post_status' => 'pending');
+	$content = trim(get_option('prepost-code')).trim($_POST['pagcontent']).trim(get_option('afterpost-code'));
+	if (get_option('category-select') == 1) {
+		$post = array(  'post_title' => $_POST['pagtitle'],
+						'post_content' => $content ,
+						'post_type' => 'post',
+						'post_category' => array(intval($_POST['categoryid'])),
+						'post_status' => 'pending');
+	} else {
+		$post = array(  'post_title' => $_POST['pagtitle'],
+						'post_content' => $content ,
+						'post_type' => 'post',
+						'post_status' => 'pending');
+	}
 	$id = wp_insert_post( $post, $wp_error );
 	$response = json_encode( array( 'success' => true ,
 								    'msg' => get_option('after-post-msg') ) );
@@ -167,5 +187,4 @@ function pag_post(){
 	//var_dump($_POST);
 	die();
 }
-
 ?>
