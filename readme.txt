@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: Guest, Post, Posts, Content
 Requires at least: 2.8
 Tested up to: 3.5
-Stable tag: 0.9.2
+Stable tag: 0.9.3
 License: GPLv2
 
 Post as Guest - Creates a form (shortcode) to a page to allow guests to post content.
@@ -32,9 +32,16 @@ Support Forum @ [powie.de](http://goo.gl/lfR7B)
 3. Place the shortcode on your page or `<?php echo do_shortcode('[post-as-guest]'); ?>` in your templates
 
 == Frequently Asked Questions ==
+= Can I send notifications to more than one adresses =
+Yes its simple. Seperate multiple eMail adresses by comma: <code>mail@domain.tld, mail2@domain2.tld</code>
+
+= Where can I find more informations =
 Use our forum at www.powie.de for support
 
 == Changelog ==
+= 0.9.3 (27.01.2013) =
+* Notification function
+
 = 0.9.2 (23.01.2013) =
 * User can select category, if allowed in settings
 
@@ -45,7 +52,7 @@ Use our forum at www.powie.de for support
 * initial version
 
 == Upgrade Notice ==
-na
+Simple install the new version
 
 == Screenshots ==
 1. Waiting for approval

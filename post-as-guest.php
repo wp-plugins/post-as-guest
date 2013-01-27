@@ -3,7 +3,7 @@
 Plugin Name: Post As Guest
 Plugin URI: http://www.powie.de/wordpress/post-as-guest/
 Description: Post as Guest - Creates a form (shortcode) to a page to allow guests to post
-Version: 0.9.2
+Version: 0.9.3
 License: GPLv2
 Author: Thomas Ehrhardt
 Author URI: http://www.powie.de
@@ -64,7 +64,9 @@ function pag_register_settings() {
 	register_setting( 'pag-settings', 'prepost-code');
 	register_setting( 'pag-settings', 'afterpost-code' );
 	register_setting( 'pag-settings', 'after-post-msg' );
-	register_setting( 'pag-settings', 'category-select' );				//Auswahl der Kategorie gestatten
+	register_setting( 'pag-settings', 'category-select', 'intval' );				//Auswahl der Kategorie gestatten
+	register_setting( 'pag-settings', 'notify-admin', 'intval' );					//Admin Benachrichtigung 1 / 0
+	register_setting( 'pag-settings', 'notify-email' );				//Admin eMail Adresse
 }
 
 function pag_shortcode( $atts ) {
@@ -180,11 +182,29 @@ function pag_post(){
 						'post_status' => 'pending');
 	}
 	$id = wp_insert_post( $post, $wp_error );
+
 	$response = json_encode( array( 'success' => true ,
 								    'msg' => get_option('after-post-msg') ) );
 	header( "Content-Type: application/json" );
 	echo $response;
-	//var_dump($_POST);
+	if (get_option('notify-admin') == 1) {
+		pag_notify($_POST['pagtitle']);
+	}
 	die();
+}
+
+function pag_notify($posttitle){
+	//prepare
+	$msg = __('A new guest post is added at ','pag').get_bloginfo()."<br /><br />";
+	$msg.= __('Title', 'pag').': '.$posttitle."<br /><br />";
+	$msg.= site_url();
+	$title = get_bloginfo().' - '.__('New Guest Post','pag');
+	//header
+	$header1  = 'MIME-Version: 1.0' . "\r\n";
+	$header1 .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+	$header1 .= 'From: '.get_bloginfo().' <'.get_bloginfo('admin_email').'>'."\r\n";
+	//send
+	mail(get_option('notify-email'), $title, $msg, $header1);
+	return true;
 }
 ?>

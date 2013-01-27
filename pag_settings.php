@@ -52,6 +52,25 @@ if  ( get_option('postfield-legend') == '' ) {
     </div>
 </div>
 
+<div class="postbox">
+<h3><?php _e('Notification settings', 'pag') ?></h3>
+	<div class="inside">
+    <table class="form-table">
+        <tr valign="top">
+	        <th scope="row"><?php _e('Send notifications', 'pag') ?></th>
+    	    <td><input type="checkbox" name="notify-admin" id="notify-admin" value="1" <?php checked(get_option('notify-admin'), 1); ?> /></td>
+        </tr>
+        <tr valign="top">
+        	<th scope="row"><?php _e('Notifications eMail', 'pag') ?></th>
+        	<td>
+        		<input type="text" size="100" name="notify-email" value="<?php echo get_option('notify-email'); ?>" /><br />
+        		<?php  _e('Seperate multiple eMail adresses with a comma', 'pag') ?>
+        	</td>
+        </tr>
+    </table>
+    </div>
+</div>
+
 </div>
 <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
 </form>

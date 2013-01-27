@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Post-As-Guest\n"
-"POT-Creation-Date: 2013-01-23 08:41+0100\n"
-"PO-Revision-Date: 2013-01-23 08:42+0100\n"
+"POT-Creation-Date: 2013-01-27 15:16+0100\n"
+"PO-Revision-Date: 2013-01-27 15:17+0100\n"
 "Last-Translator: Powie <te@powie.de>\n"
 "Language-Team: powie.de <te@powie.de>\n"
 "Language: de_DE\n"
@@ -99,14 +99,31 @@ msgid "Message after post"
 msgstr "Benachrichtigung nach dem Absenden"
 
 #: ../pag_settings.php:56
+msgid "Notification settings"
+msgstr "Benachrichtigungs Einstellungen"
+
+#: ../pag_settings.php:60
+msgid "Send notifications"
+msgstr "Benachrichtigungen senden"
+
+#: ../pag_settings.php:64
+msgid "Notifications eMail"
+msgstr "Benachrichtigung e-Mail"
+
+#: ../pag_settings.php:67
+msgid "Seperate multiple eMail adresses with a comma"
+msgstr ""
+"Mehrere eMail Adressen durch ein Komma von einander trennen <code>,</code>"
+
+#: ../pag_settings.php:75
 msgid "Save Changes"
 msgstr "Änderungen speichern"
 
-#: ../pag_settings.php:62
+#: ../pag_settings.php:81
 msgid "Post as guest Usage"
 msgstr "Post-As-Guest Benutzung"
 
-#: ../pag_settings.php:64
+#: ../pag_settings.php:83
 msgid ""
 "Simple use a shortcode on a page of your choice or create a new page and "
 "insert the following shortcode: <code>[post-as-guest]</code> to show the "
@@ -115,7 +132,7 @@ msgstr ""
 "Benutze den Shortcode: <code>[post-as-guest]</code> auf einer Seite um das "
 "Formular anzeigen zu lassen mit dem Gäste Beiträge einsenden können."
 
-#: ../pag_settings.php:69
+#: ../pag_settings.php:88
 msgid "About"
 msgstr "Über"
 
@@ -135,26 +152,34 @@ msgstr "Post As Guest"
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: ../post-as-guest.php:83
+#: ../post-as-guest.php:85 ../post-as-guest.php:199
 msgid "Title"
 msgstr "Titel"
 
-#: ../post-as-guest.php:88
+#: ../post-as-guest.php:90
 msgid "Category"
 msgstr "Kategorie"
 
-#: ../post-as-guest.php:90
+#: ../post-as-guest.php:92
 msgid "-- Please Select Category"
 msgstr "-- Kategorie auswählen"
 
-#: ../post-as-guest.php:98
+#: ../post-as-guest.php:100
 msgid "Send In"
 msgstr "Einsenden"
 
-#: ../post-as-guest.php:108
+#: ../post-as-guest.php:110
 msgid "Thanks for your post. We will review your post befor publication."
 msgstr ""
 "Danke für den Beitrag. Ein Admin wird diesen vor Veröffentlichung überprüfen"
+
+#: ../post-as-guest.php:198
+msgid "A new guest post is added at "
+msgstr "Ein neuer Gäste Beitrag wurde hinzugefügt bei"
+
+#: ../post-as-guest.php:201
+msgid "New Guest Post"
+msgstr "Neuer Gäste Beitrag"
 
 #~ msgid "Post as guest Review"
 #~ msgstr "Post As Guest Vorschau"
