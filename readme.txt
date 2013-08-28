@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: Guest, Post, Posts, Content
 Requires at least: 2.8
 Tested up to: 3.6
-Stable tag: 0.9.3
+Stable tag: 0.9.4
 License: GPLv2
 
 Post as Guest - Creates a form (shortcode) to a page to allow guests to post content.
@@ -39,6 +39,9 @@ Yes its simple. Seperate multiple eMail adresses by comma: <code>mail@domain.tld
 Use our forum at www.powie.de for support
 
 == Changelog ==
+= 0.9.4
+* Set default category in admin settings
+
 = 0.9.3 (27.01.2013) =
 * Notification function
 

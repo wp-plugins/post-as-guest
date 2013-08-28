@@ -27,6 +27,22 @@ if  ( get_option('postfield-legend') == '' ) {
     	    <td><input type="checkbox" name="category-select" id="category-select" value="1" <?php checked(get_option('category-select'), 1); ?> /></td>
         </tr>
 
+        <tr valign="top">
+	        <th scope="row"><?php _e('Default Category', 'pag') ?></th>
+    	    <td>
+			   <select id="default-categoryid" name="default-categoryid">
+					<option value=""><?php _e('-- Please Select Category','pag'); ?></option>
+					<?php
+						$categories = get_categories('hierarchical=0&hide_empty=0');
+						foreach($categories as $category)	{
+							$selected = ( get_option('default-categoryid') == $category->cat_ID ) ? 'selected' : '';
+							echo '<option '.$selected.' value="'.$category->cat_ID.'">'.$category->cat_name.'</option>';
+						}
+					?>
+				</select>
+			</td>
+        </tr>
+
     </table>
     </div>
 </div>

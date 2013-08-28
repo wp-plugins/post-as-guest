@@ -3,7 +3,7 @@
 Plugin Name: Post As Guest
 Plugin URI: http://www.powie.de/wordpress/post-as-guest/
 Description: Post as Guest - Creates a form (shortcode) to a page to allow guests to post
-Version: 0.9.3
+Version: 0.9.4
 License: GPLv2
 Author: Thomas Ehrhardt
 Author URI: http://www.powie.de
@@ -59,14 +59,15 @@ function pag_create_menu() {
 
 function pag_register_settings() {
 	//register settings
-	register_setting( 'pag-settings', 'postfield-rows', 'intval' );		//Zeilen Textarea
-	register_setting( 'pag-settings', 'postfield-legend');				//Bezeichnung
+	register_setting( 'pag-settings', 'postfield-rows', 'intval' );				//Zeilen Textarea
+	register_setting( 'pag-settings', 'postfield-legend');						//Bezeichnung
 	register_setting( 'pag-settings', 'prepost-code');
 	register_setting( 'pag-settings', 'afterpost-code' );
 	register_setting( 'pag-settings', 'after-post-msg' );
-	register_setting( 'pag-settings', 'category-select', 'intval' );				//Auswahl der Kategorie gestatten
-	register_setting( 'pag-settings', 'notify-admin', 'intval' );					//Admin Benachrichtigung 1 / 0
-	register_setting( 'pag-settings', 'notify-email' );				//Admin eMail Adresse
+	register_setting( 'pag-settings', 'category-select', 'intval' );			//Auswahl der Kategorie gestatten
+	register_setting( 'pag-settings', 'default-categoryid', 'intval' );			//Auswahl der Standard Kategorie
+	register_setting( 'pag-settings', 'notify-admin', 'intval' );				//Admin Benachrichtigung 1 / 0
+	register_setting( 'pag-settings', 'notify-email' );							//Admin eMail Adresse
 }
 
 function pag_shortcode( $atts ) {
@@ -92,7 +93,8 @@ function pag_shortcode( $atts ) {
 					<option value="">'.__('-- Please Select Category','pag').'</option>';
 						$categories = get_categories('hierarchical=0&hide_empty=0');
 						foreach($categories as $category)	{
-							$selected = (is_category($category->cat_ID)) ? 'selected' : '';
+							//$selected = (is_category($category->cat_ID)) ? 'selected' : '';
+							$selected = ( get_option('default-categoryid') == $category->cat_ID ) ? 'selected' : '';
 							$sc.='<option '.$selected.' value="'.$category->cat_ID.'">'.$category->cat_name.'</option>';
 						}
 		$sc.='</select><br />';
