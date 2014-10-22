@@ -3,7 +3,7 @@
 Plugin Name: Post As Guest
 Plugin URI: http://www.powie.de/wordpress/post-as-guest/
 Description: Post as Guest - Creates a form (shortcode) to a page to allow guests to post
-Version: 0.9.4
+Version: 0.9.5
 License: GPLv2
 Author: Thomas Ehrhardt
 Author URI: http://www.powie.de
